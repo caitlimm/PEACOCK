@@ -147,8 +147,8 @@ foreach my $keys (sort keys %two){
 		$cownt++;
 	}
 }
-print scalar keys %two;
-print " $cownt\n";
+#print scalar keys %two;
+#print " $cownt\n";
 
 open (THREE,'<',$ARGV[5]) or die $!;
 #HUMAN|Ensembl=ENSG00000005189|UniProtKB=H3BM72  9_state_high    H3K4me3 HepG2
@@ -172,10 +172,10 @@ close SEV;
 $count=0;
 
 if ($p300 eq "yes"){
-	print OUT "enhancer\tgene\tH3K27ac_enhancer\tH3K4me1\tH3K4me3\teQTL_Zscore\tcoeff_abs\tnearest\tintronic\tH3K27ac_promoter\tp300\n";
+	print OUT "enhancer\tgene\tH3K27ac_enhancer\tH3K4me1\tH3K4me3\teQTL_Zscore\tnearest\tintronic\tcoeff_abs\tH3K27ac_promoter\tp300\n";
 }
 elsif ($p300 eq "no"){
-	print OUT "enhancer\tgene\tH3K27ac_enhancer\tH3K4me1\tH3K4me3\teQTL_Zscore\tcoeff_abs\tnearest\tintronic\tH3K27ac_promoter\n";
+	print OUT "enhancer\tgene\tH3K27ac_enhancer\tH3K4me1\tH3K4me3\teQTL_Zscore\tnearest\tintronic\tcoeff_abs\tH3K27ac_promoter\n";
 }
 else{
 	print "UHOH!";
@@ -184,13 +184,13 @@ else{
 foreach my $links (sort keys %all){
 	print OUT "$links\t";
 	($enhancer, $gene)=(split /\t/, $links);
-	if ($enhancer ~~ %one){
+	if ($enhancer ~~ %one){ #H3K7ac enhancer yes/no high
 		print OUT "1\t";
 	}
 	else {
 		print OUT "0\t";
 	}
-	if ($enhancer ~~ %two){
+	if ($enhancer ~~ %two){ #H3K4me1
 		$count=0;
 		foreach my $entry (keys %{$two{$enhancer}}){
 			$count++;
@@ -202,13 +202,13 @@ foreach my $links (sort keys %all){
 	else {
 		print OUT "0\t";
 	}
-	if ($gene ~~ %three){
+	if ($gene ~~ %three){ #H3K4me3
 		print OUT "1\t";
 	}
 	else{
 		print OUT "0\t";
 	}
-	if ($links ~~ %fiveCS){
+	if ($links ~~ %fiveCS){ #eqtl z score
 		$entry=$fiveCS{$links};
 		chop $entry;
 		print OUT "$entry\t";
@@ -216,7 +216,7 @@ foreach my $links (sort keys %all){
 	else {
 		print OUT "0\t";
 	}
-	if ($links ~~ %seven){
+	if ($links ~~ %seven){ #nearest
 		print OUT "1\t";
 	}
 	else {
@@ -233,14 +233,14 @@ foreach my $links (sort keys %all){
 			print OUT "0\t"; #the enhancer is not intronic
 		}
 	}
-	if ($links ~~ %absCS){
+	if ($links ~~ %absCS){	#eqtl coeff abs value
 		$coeff=$absCS{$links};
 		print OUT "$coeff\t"; 
 	}
 	else{
 		print OUT "0\t";
 	}
-	if ($gene ~~ %new){
+	if ($gene ~~ %new){	#H3K27ac gene value
 		$count=0;
 		$sum=0;
 		foreach my $key (keys %{$new{$gene}}){
@@ -253,7 +253,7 @@ foreach my $links (sort keys %all){
 	else{
 		print OUT "0\t"; #the gene value given is zero
 	}
-	if ($p300 eq "yes"){
+	if ($p300 eq "yes"){	#p300
 		if ($enhancer ~~ %p300){
 			$coeff=$p300{$enhancer};
 			print OUT "\t$coeff\n";
