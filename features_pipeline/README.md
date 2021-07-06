@@ -1,4 +1,4 @@
-### This pipeline explains how to generate the dataset ascribing machine learning features of interest (to me) to all cis enhancer-gene links involving PEREGRINE enhancers and PANTHER genes. 
+### This pipeline explains how to generate the dataset ascribing machine learning features of interest (to PEACOCK) to all cis enhancer-gene links involving PEREGRINE enhancers and PANTHER genes. 
 
 Here are the features:  
 F1: H3K27ac (enhancer): 0/1  
