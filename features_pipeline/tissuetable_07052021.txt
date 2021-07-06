@@ -76,3 +76,4 @@
 80	brain_pericyte
 81	endometrial_microvascular_endothelial_cells
 82	endothelial_cell_of_hepatic_sinusoid
+83  HepG2
