@@ -6,6 +6,6 @@ To view the pipeline to generate enhancer-gene link data with all features used 
 
 In order to get the large file cislinks, concatenate the files in the cislinks folder.
 
-The R object models gives the final model and the alternate model (for datasets missing the P300 feature).
-
 To score new data, see the scoring folder, which also includes sample data.
+
+The R object PEACOCK.RData in the scoring folder includes the final model and the alternate final model for data missing the P300 feature.
